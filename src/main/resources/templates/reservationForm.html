@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="Munteanu Alexandru" content="Reservation form" />
+        <title>Inregistare masina</title>
+        <link rel="stylesheet" th:href="@{/bootstrap/css/styles.css}" type="text/css" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-body-tertiary">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Rezervare masina</h3></div>
+                                    <div class="card-body">
+                                        <form action="#" method="post" th:action="@{/submitReservation}" th:object="${reservation}">
+                                            <div class="row mb-3">
+                                                <div class="col-mb-6 justify-content-center d-block">
+                                                    <div class="d-flex justify-content-center mb-2">
+                                                        <label for="customerSelect">Selecteaza client</label>
+                                                    </div>
+                                                    <select class="form-select form-select-lg mb-3"
+                                                            aria-label=".form-select-lg example"
+                                                            id="customerSelect"
+                                                            th:field = "*{customer}">
+                                                        <option th:each="customer : ${customerList}" th:value="${customer.id}" th:text="${customer.fullName}" ></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-mb-6 justify-content-center d-block">
+                                                    <div class="d-flex justify-content-center mb-2">
+                                                        <label>Selecteaza masina</label>
+                                                    </div>
+                                                    <select class="form-select form-select-lg mb-3"
+                                                            aria-label=".form-select-lg example"
+                                                            id="carId"
+                                                            th:field = "*{car}">
+                                                        <option th:each="car : ${carList}" th:value="${car.id}" th:text="${car.carName}" ></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-mb-6 d-lg-flex d-sm-block justify-content-lg-between border rounded justify-content-sm-center">
+                                                    <div class="d-block justify-content-center col-lg-5">
+                                                        <div class="d-flex justify-content-center">
+                                                            <label for="startDate">Selecteaza data de incepere</label>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center">
+                                                            <input type="date"
+                                                                   value="2023-03-03"
+                                                                   min="2023-01-01" max="2023-12-31"
+                                                                   th:field="*{startDate}"
+                                                                   id="startDate">
+                                                        </div>
+                                                        <div class="d-flex justify-content-center">
+                                                            <span th:class="text-danger" th:if = "${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-block justify-content-center col-lg-5">
+                                                        <div class="d-flex justify-content-center">
+                                                            <label for="endDate">Selecteaza data de final</label>
+                                                        </div>
+                                                        <div class="d-flex justify-content-center">
+                                                            <input type="date" id="endDate"
+                                                                   min="2023-01-01" max="2023-12-31"
+                                                                   th:field="*{endDate}">
+                                                        </div>
+                                                        <div class="d-flex justify-content-center">
+                                                            <span th:class="text-danger" th:if = "${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-4 mb-0 d-flex justify-content-center">
+                                                <button class="btn btn-primary" type="submit">
+                                                    Rezerva
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+                                        <a class="nav-link" href="index">
+                                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Car Rent 2023</div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script th:src="@{/bootstrap/js/bootstrap.min.js}"/>
+    </body>
+</html>
